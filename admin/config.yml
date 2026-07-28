@@ -13,11 +13,15 @@ collections:
     slug: "{{slug}}"
     fields:
       - { label: "Title", name: "title", widget: "string" }
+      - { label: "URL Slug", name: "slug", widget: "string", hint: "Used in the page address, e.g. my-post-title. Avoid changing this after publishing." }
       - { label: "Date", name: "date", widget: "datetime" }
-      - { label: "Category", name: "category", widget: "select", options: ["Guide", "Itinerary", "Practical", "Tips"] }
-      - { label: "Cover Image", name: "image", widget: "image", required: false }
-      - { label: "Excerpt", name: "excerpt", widget: "text" }
-      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "Date (display text)", name: "date_display", widget: "string", hint: "How the date shows on the page, e.g. July 28, 2026" }
+      - { label: "Category", name: "category", widget: "select", options: ["Guide", "Itinerary", "Practical", "Weather", "Beaches", "Hotels", "Tips"] }
+      - { label: "Featured on Homepage", name: "featured", widget: "boolean", default: false }
+      - { label: "Cover Photo", name: "cover", widget: "image" }
+      - { label: "Extra Photos (optional gallery)", name: "gallery", widget: "list", required: false, field: { label: "Photo", name: "photo", widget: "image" } }
+      - { label: "Excerpt (shown in listing)", name: "excerpt", widget: "text" }
+      - { label: "Full Article", name: "body", widget: "markdown" }
 
   - name: "restaurants"
     label: "Restaurants"

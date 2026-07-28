@@ -1,0 +1,36 @@
+---
+pagination:
+  data: collections.blog
+  size: 1
+  alias: post
+permalink: "/blog/{{ post.data.slug }}/index.html"
+layout: base.njk
+eleventyExcludeFromCollections: true
+pageTitle: "{{ post.data.title }} — Travel Antalya"
+pageDescription: "{{ post.data.excerpt }}"
+pageUrl: "/blog/{{ post.data.slug }}/"
+ogImage: "{{ post.data.cover }}"
+ogType: "article"
+schema:
+  "@context": "https://schema.org"
+  "@type": "BlogPosting"
+  headline: "{{ post.data.title }}"
+  datePublished: "{{ post.data.date }}"
+  image: "https://travel-antalya.com{{ post.data.cover }}"
+  description: "{{ post.data.excerpt }}"
+  author: { "@type": "Organization", name: "Travel Antalya" }
+  publisher: { "@type": "Organization", name: "Travel Antalya" }
+---
+<div class="article-header">
+  <div class="container">
+    <span class="post-category-pill">{{ post.data.category }}</span>
+    <span class="post-date">{{ post.data.date_display }}</span>
+    <h1 style="font-size:clamp(1.9rem,4vw,2.7rem); margin-top:0.3em;">{{ post.data.title }}</h1>
+  </div>
+</div>
+
+<div class="article-cover"><img src="{{ post.data.cover }}" alt="{{ post.data.title }}"></div>
+
+<article class="article-body">
+{{ post.templateContent | safe }}
+</article>
