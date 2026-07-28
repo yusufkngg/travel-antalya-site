@@ -1,0 +1,37 @@
+# Old WordPress URLs -> new static site URLs (301 permanent redirects)
+# Blog posts
+/kaputas-beach-travel-antalya/  /blog/kaputas-beach-travel-antalya.html  301
+/michelin-key-hotel-guide-antalya/  /blog/michelin-key-hotel-guide-antalya.html  301
+/antalya-in-winter/  /blog/antalya-in-winter.html  301
+/current-antalya-weather-in-turkey/  /blog/current-antalya-weather-in-turkey.html  301
+/is-antalya-weather-pleasant-in-november-or-already-winter/  /blog/is-antalya-weather-pleasant-in-november-or-already-winter.html  301
+/discover-why-everyone-is-asking-is-antalya-nice-a-travel-guide/  /blog/discover-why-everyone-is-asking-is-antalya-nice-a-travel-guide.html  301
+/antalya-weather-by-months-what-to-expect-before-you-visit/  /blog/antalya-weather-by-months-what-to-expect-before-you-visit.html  301
+/antalya-weather-in-june-perfect-summer-or-too-hot-to-explore/  /blog/antalya-weather-in-june-perfect-summer-or-too-hot-to-explore.html  301
+/is-may-one-of-the-best-months-for-antalya-weather/  /blog/is-may-one-of-the-best-months-for-antalya-weather.html  301
+/antalya-weather-in-march-can-you-enjoy-the-city-yet/  /blog/antalya-weather-in-march-can-you-enjoy-the-city-yet.html  301
+/what-is-antalya-weather-really-like-in-february/  /blog/what-is-antalya-weather-really-like-in-february.html  301
+/is-december-too-cold-in-antalya-weather-rain-sea-conditions/  /blog/is-december-too-cold-in-antalya-weather-rain-sea-conditions.html  301
+/antalya-weather-in-october-summer-feel-or-start-of-autumn/  /blog/antalya-weather-in-october-summer-feel-or-start-of-autumn.html  301
+/is-antalya-weather-good-in-april-for-a-holiday-or-too-risky/  /blog/is-antalya-weather-good-in-april-for-a-holiday-or-too-risky.html  301
+
+# Blog archive / category
+/category/blog/  /blog/index.html  301
+/category/blog/page/2/  /blog/index.html  301
+/category/blog/*  /blog/index.html  301
+
+# Pages
+/hotels/  /guide/hotels.html  301
+/beachfront-hotels/  /guide/hotels.html  301
+/things-to-do-in-antalya/  /guide/things-to-do.html  301
+/antalya-events/  /guide/events.html  301
+
+# Pages not yet rebuilt on the new site — temporarily send to homepage
+# TODO: build real /about/ and /privacy-policy/ pages, then point these at them instead
+/about/  /  301
+/privacy-policy/  /  301
+/global-styles/  /  301
+
+# Old static guide pages replaced by Eleventy-generated listing/detail pages
+/guide/hotels.html  /hotels/  301
+/guide/restaurants.html  /restaurants/  301

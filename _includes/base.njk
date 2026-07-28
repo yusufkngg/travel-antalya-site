@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ pageTitle }} — Travel Antalya</title>
+<meta name="description" content="{{ pageDescription }}">
+<link rel="canonical" href="https://travel-antalya.com{{ pageUrl }}">
+<meta property="og:type" content="{{ ogType or 'website' }}">
+<meta property="og:title" content="{{ pageTitle }}">
+<meta property="og:description" content="{{ pageDescription }}">
+<meta property="og:image" content="https://travel-antalya.com{{ ogImage or '/images/photos/antalya-beach-drone.jpg' }}">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="/images/favicon.png">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/listings.css">
+{% if schema %}
+<script type="application/ld+json">{{ schema | dump | safe }}</script>
+{% endif %}
+</head>
+<body>
+
+<header class="site-header">
+  <div class="nav-row">
+    <a href="/"><img src="/images/logo.png" alt="Travel Antalya" class="logo-mark"></a>
+    <ul class="nav-links">
+      <li><a href="/guide/things-to-do.html">Explore</a></li>
+      <li><a href="/hotels/">Places To Stay</a></li>
+      <li><a href="/restaurants/">Eat &amp; Drink</a></li>
+      <li><a href="/guide/events.html">Events</a></li>
+      <li><a href="/blog/">Blog</a></li>
+      <li><a href="/guide/events.html" class="nav-cta">Deals</a></li>
+    </ul>
+  </div>
+</header>
+
+{{ content | safe }}
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <img src="/images/logo.png" alt="Travel Antalya" style="height:36px; filter:brightness(0) invert(1);">
+        <p style="color:rgba(255,255,255,0.6); margin-top:14px; max-width:280px;">An independent guide to Turkey's Turquoise Coast.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="/guide/things-to-do.html">Things To Do</a></li>
+          <li><a href="/restaurants/">Eat &amp; Drink</a></li>
+          <li><a href="/hotels/">Places To Stay</a></li>
+          <li><a href="/guide/events.html">Events</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Guide</h4>
+        <ul>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Follow</h4>
+        <ul><li><a href="#">Instagram</a></li></ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Travel Antalya</span>
+      <span>Antalya, Turkey</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

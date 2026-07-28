@@ -1,0 +1,108 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "blog"
+    label: "Blog Posts"
+    folder: "content/blog"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Category", name: "category", widget: "select", options: ["Guide", "Itinerary", "Practical", "Tips"] }
+      - { label: "Cover Image", name: "image", widget: "image", required: false }
+      - { label: "Excerpt", name: "excerpt", widget: "text" }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "restaurants"
+    label: "Restaurants"
+    folder: "content/restaurants"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Name", name: "title", widget: "string" }
+      - { label: "Tagline", name: "tagline", widget: "string" }
+      - { label: "Tags", name: "tags", widget: "select", multiple: true, options: ["sponsored", "editors-choice"], required: false }
+      - { label: "Category", name: "category", widget: "select", options: ["Seafood", "Rooftop", "Local Classic", "Cafe", "Fine Dining"] }
+      - { label: "Neighborhood", name: "neighborhood", widget: "string" }
+      - { label: "Price Range", name: "price", widget: "select", options: ["$", "$$", "$$$", "$$$$"] }
+      - { label: "Cover Photo", name: "cover", widget: "image" }
+      - { label: "Photo Gallery (7-10 photos)", name: "photos", widget: "list", field: { label: "Photo", name: "photo", widget: "image" } }
+      - label: "Signature Dishes / Concept"
+        name: "signature_dishes"
+        widget: "list"
+        fields:
+          - { label: "Dish", name: "name", widget: "string" }
+          - { label: "Note", name: "note", widget: "string" }
+      - { label: "Map Latitude", name: "map_lat", widget: "number", value_type: "float", required: false }
+      - { label: "Map Longitude", name: "map_lng", widget: "number", value_type: "float", required: false }
+      - { label: "Reservation / Booking Link", name: "booking_url", widget: "string", required: false }
+      - label: "Nearby Places"
+        name: "nearby"
+        widget: "list"
+        required: false
+        fields:
+          - { label: "Name", name: "name", widget: "string" }
+          - { label: "Type", name: "type", widget: "select", options: ["Hotel", "Restaurant", "Beach", "Bar", "Activity"] }
+          - { label: "Link", name: "link", widget: "string" }
+      - { label: "Excerpt (shown in listing)", name: "excerpt", widget: "text" }
+      - { label: "Full Description", name: "body", widget: "markdown" }
+
+  - name: "hotels"
+    label: "Hotels"
+    folder: "content/hotels"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Name", name: "title", widget: "string" }
+      - { label: "Tagline", name: "tagline", widget: "string" }
+      - { label: "Tags", name: "tags", widget: "select", multiple: true, options: ["sponsored", "editors-choice"], required: false }
+      - { label: "Category", name: "category", widget: "select", options: ["Boutique", "Beachfront", "Golf", "Luxury Resort", "Family", "Budget"] }
+      - { label: "Neighborhood", name: "neighborhood", widget: "string" }
+      - { label: "Price Range", name: "price", widget: "select", options: ["$", "$$", "$$$", "$$$$"] }
+      - { label: "Cover Photo", name: "cover", widget: "image" }
+      - { label: "Photo Gallery (7-10 photos)", name: "photos", widget: "list", field: { label: "Photo", name: "photo", widget: "image" } }
+      - label: "Amenities"
+        name: "amenities"
+        widget: "list"
+        field: { label: "Amenity", name: "amenity", widget: "string" }
+      - { label: "Map Latitude", name: "map_lat", widget: "number", value_type: "float", required: false }
+      - { label: "Map Longitude", name: "map_lng", widget: "number", value_type: "float", required: false }
+      - { label: "Booking Link (affiliate)", name: "booking_url", widget: "string", required: false }
+      - label: "Nearby Places"
+        name: "nearby"
+        widget: "list"
+        required: false
+        fields:
+          - { label: "Name", name: "name", widget: "string" }
+          - { label: "Type", name: "type", widget: "select", options: ["Hotel", "Restaurant", "Beach", "Bar", "Activity"] }
+          - { label: "Link", name: "link", widget: "string" }
+      - { label: "Excerpt (shown in listing)", name: "excerpt", widget: "text" }
+      - { label: "Full Description", name: "body", widget: "markdown" }
+
+  - name: "things-to-do"
+    label: "Things To Do"
+    folder: "content/things-to-do"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Name", name: "title", widget: "string" }
+      - { label: "Category", name: "category", widget: "select", options: ["Old Town", "Nature", "Ancient Ruins", "Beaches", "Museums"] }
+      - { label: "Photo", name: "image", widget: "image", required: false }
+      - { label: "Description", name: "description", widget: "text" }
+
+  - name: "events"
+    label: "Events"
+    folder: "content/events"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Name", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Photo", name: "image", widget: "image", required: false }
+      - { label: "Description", name: "description", widget: "text" }

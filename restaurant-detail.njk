@@ -1,0 +1,82 @@
+---
+pagination:
+  data: collections.restaurants
+  size: 1
+  alias: r
+permalink: "/restaurants/{{ r.data.title | slugify }}/index.html"
+layout: base.njk
+eleventyExcludeFromCollections: true
+pageTitle: "{{ r.data.title }} — Travel Antalya"
+pageDescription: "{{ r.data.excerpt }}"
+pageUrl: "/restaurants/{{ r.data.title | slugify }}/"
+ogImage: "{{ r.data.cover }}"
+ogType: "website"
+---
+<section class="detail-hero">
+  <div class="detail-hero-media">
+    <img src="{{ r.data.cover }}" alt="{{ r.data.title }}">
+  </div>
+</section>
+
+<div class="container detail-title-block">
+  {% if r.data.tags %}
+    {% for tag in r.data.tags %}
+      {% if tag == "sponsored" %}<span class="badge badge-sponsored">Sponsored</span>{% endif %}
+      {% if tag == "editors-choice" %}<span class="badge badge-editors">Editor's Choice</span>{% endif %}
+    {% endfor %}
+  {% endif %}
+  <span class="badge badge-verified">{{ r.data.category }}</span>
+  <h1>{{ r.data.title }}</h1>
+  <p class="lead">{{ r.data.tagline }}</p>
+</div>
+
+<div class="container">
+  {% if r.data.photos %}
+  <div class="gallery-grid">
+    {% for photo in r.data.photos %}
+    <a href="{{ photo }}" target="_blank" rel="noopener"><img src="{{ photo }}" alt="{{ r.data.title }} photo {{ loop.index }}"></a>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <div class="detail-columns" style="margin-top:30px;">
+    <div>
+      <h2>About {{ r.data.title }}</h2>
+      {{ r.templateContent | safe }}
+
+      {% if r.data.signature_dishes %}
+      <h2>Concept &amp; Signature Dishes</h2>
+      <ul class="signature-list">
+        {% for d in r.data.signature_dishes %}<li><strong>{{ d.name }}</strong> — {{ d.note }}</li>{% endfor %}
+      </ul>
+      {% endif %}
+
+      {% if r.data.map_lat and r.data.map_lng %}
+      <h2>Location</h2>
+      <div class="map-embed">
+        <iframe src="https://www.google.com/maps?q={{ r.data.map_lat }},{{ r.data.map_lng }}&output=embed" loading="lazy"></iframe>
+      </div>
+      {% endif %}
+
+      {% if r.data.nearby %}
+      <h2>Nearby</h2>
+      <div class="nearby-grid">
+        {% for n in r.data.nearby %}
+        <a class="nearby-card" href="{{ n.link }}" style="text-decoration:none;">
+          <span class="nearby-type">{{ n.type }}</span>
+          <h4>{{ n.name }}</h4>
+        </a>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+
+    <aside class="detail-side">
+      <div class="price-tag">{{ r.data.price }}</div>
+      <div style="color:var(--ink-soft); font-size:0.9rem;">{{ r.data.neighborhood }}</div>
+      {% if r.data.booking_url %}
+      <a href="{{ r.data.booking_url }}" target="_blank" rel="noopener sponsored" class="btn btn-orange">Reserve a Table</a>
+      {% endif %}
+    </aside>
+  </div>
+</div>

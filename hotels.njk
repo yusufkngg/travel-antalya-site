@@ -1,0 +1,64 @@
+---
+layout: base.njk
+pageTitle: "Hotels in Antalya — Places to Stay"
+pageDescription: "From Kaleiçi boutique hotels to Belek's all-inclusive golf resorts — find the right place to stay in Antalya, Turkey."
+pageUrl: "/hotels/"
+ogImage: "/images/photos/antalya-hotels.avif"
+permalink: "/hotels/index.html"
+schema:
+  "@context": "https://schema.org"
+  "@type": "CollectionPage"
+  name: "Hotels in Antalya"
+  url: "https://travel-antalya.com/hotels/"
+eleventyExcludeFromCollections: true
+---
+<section class="listing-hero">
+  <div class="container">
+    <span class="eyebrow">Places to Stay</span>
+    <h1>Antalya Hotels</h1>
+    <p class="lead" style="max-width:620px;">Home, sweet hotel. From luxurious oceanfront resorts to intimate courtyard stays in the old town, here's every hotel in our guide.</p>
+  </div>
+</section>
+
+<section style="padding-top:0;">
+  <div class="container">
+    <div class="filter-bar">
+      <span class="filter-pill">Neighborhood</span>
+      <span class="filter-pill">Price</span>
+      <span class="filter-pill">Michelin</span>
+      <span class="filter-pill">Amenities</span>
+    </div>
+    <p class="results-count">Showing {{ collections.hotels.length }} hotels</p>
+
+    {% for hotel in collections.hotels %}
+    <div class="listing-row">
+      <div class="listing-row-media">
+        {% if hotel.data.tags and "sponsored" in hotel.data.tags %}<span class="card-tag" style="background:var(--brand-blue-deep);">Sponsored</span>{% endif %}
+        <img src="{{ hotel.data.cover }}" alt="{{ hotel.data.title }}">
+      </div>
+      <div class="listing-row-body">
+        <div class="listing-row-top">
+          <div>
+            {% if hotel.data.tags %}
+              {% for tag in hotel.data.tags %}
+                {% if tag == "sponsored" %}<span class="badge badge-sponsored">Sponsored</span>{% endif %}
+                {% if tag == "editors-choice" %}<span class="badge badge-editors">Editor's Choice</span>{% endif %}
+              {% endfor %}
+            {% endif %}
+            <h3 class="listing-row-title"><a href="/hotels/{{ hotel.data.title | slugify }}/">{{ hotel.data.title }}</a></h3>
+          </div>
+          <a href="/hotels/{{ hotel.data.title | slugify }}/" class="listing-row-arrow">↗</a>
+        </div>
+        <p class="listing-row-excerpt">{{ hotel.data.excerpt }}</p>
+        <div class="listing-row-meta">
+          <span>{{ hotel.data.category }}</span>
+          <span>·</span>
+          <span>{{ hotel.data.neighborhood }}</span>
+          <span class="price">{{ hotel.data.price }}</span>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+
+  </div>
+</section>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://travel-antalya.com/sitemap.xml

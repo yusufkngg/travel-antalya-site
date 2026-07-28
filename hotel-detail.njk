@@ -1,0 +1,83 @@
+---
+pagination:
+  data: collections.hotels
+  size: 1
+  alias: hotel
+permalink: "/hotels/{{ hotel.data.title | slugify }}/index.html"
+layout: base.njk
+eleventyExcludeFromCollections: true
+pageTitle: "{{ hotel.data.title }} — Travel Antalya"
+pageDescription: "{{ hotel.data.excerpt }}"
+pageUrl: "/hotels/{{ hotel.data.title | slugify }}/"
+ogImage: "{{ hotel.data.cover }}"
+ogType: "website"
+---
+<section class="detail-hero">
+  <div class="detail-hero-media">
+    <img src="{{ hotel.data.cover }}" alt="{{ hotel.data.title }}">
+  </div>
+</section>
+
+<div class="container detail-title-block">
+  {% if hotel.data.tags %}
+    {% for tag in hotel.data.tags %}
+      {% if tag == "sponsored" %}<span class="badge badge-sponsored">Sponsored</span>{% endif %}
+      {% if tag == "editors-choice" %}<span class="badge badge-editors">Editor's Choice</span>{% endif %}
+    {% endfor %}
+  {% endif %}
+  <span class="badge badge-verified">{{ hotel.data.category }}</span>
+  <h1>{{ hotel.data.title }}</h1>
+  <p class="lead">{{ hotel.data.tagline }}</p>
+</div>
+
+<div class="container">
+  {% if hotel.data.photos %}
+  <div class="gallery-grid">
+    {% for photo in hotel.data.photos %}
+    <a href="{{ photo }}" target="_blank" rel="noopener"><img src="{{ photo }}" alt="{{ hotel.data.title }} photo {{ loop.index }}"></a>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <div class="detail-columns" style="margin-top:30px;">
+    <div>
+      <h2>About {{ hotel.data.title }}</h2>
+      {{ hotel.templateContent | safe }}
+
+      {% if hotel.data.amenities %}
+      <h2>Amenities</h2>
+      <ul class="amenities-list">
+        {% for a in hotel.data.amenities %}<li>{{ a }}</li>{% endfor %}
+      </ul>
+      {% endif %}
+
+      {% if hotel.data.map_lat and hotel.data.map_lng %}
+      <h2>Location</h2>
+      <div class="map-embed">
+        <iframe src="https://www.google.com/maps?q={{ hotel.data.map_lat }},{{ hotel.data.map_lng }}&output=embed" loading="lazy"></iframe>
+      </div>
+      {% endif %}
+
+      {% if hotel.data.nearby %}
+      <h2>Nearby</h2>
+      <div class="nearby-grid">
+        {% for n in hotel.data.nearby %}
+        <a class="nearby-card" href="{{ n.link }}" style="text-decoration:none;">
+          <span class="nearby-type">{{ n.type }}</span>
+          <h4>{{ n.name }}</h4>
+        </a>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+
+    <aside class="detail-side">
+      <div class="price-tag">{{ hotel.data.price }}</div>
+      <div style="color:var(--ink-soft); font-size:0.9rem;">{{ hotel.data.neighborhood }}</div>
+      {% if hotel.data.booking_url %}
+      <a href="{{ hotel.data.booking_url }}" target="_blank" rel="noopener sponsored" class="btn btn-orange">Check Availability</a>
+      {% endif %}
+      <p style="font-size:0.78rem; color:var(--ink-soft); margin-top:10px;">Booking links may be affiliate links — we may earn a commission at no extra cost to you.</p>
+    </aside>
+  </div>
+</div>
