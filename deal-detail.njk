@@ -1,0 +1,104 @@
+---
+pagination:
+  data: collections.deals
+  size: 1
+  alias: deal
+permalink: "/deals/{{ deal.data.category }}/{{ deal.data.title | slugify }}/index.html"
+layout: base.njk
+eleventyExcludeFromCollections: true
+pageTitle: "{{ deal.data.title }} — Travel Antalya Deals"
+pageDescription: "{{ deal.data.excerpt }}"
+pageUrl: "/deals/{{ deal.data.category }}/{{ deal.data.title | slugify }}/"
+ogImage: "{{ deal.data.cover }}"
+ogType: "website"
+schema:
+  "@context": "https://schema.org"
+  "@type": "TouristTrip"
+  name: "{{ deal.data.title }}"
+  description: "{{ deal.data.excerpt }}"
+  image: "https://travel-antalya.com{{ deal.data.cover }}"
+---
+<section class="detail-hero">
+  <div class="detail-hero-media"><img src="{{ deal.data.cover }}" alt="{{ deal.data.title }}"></div>
+</section>
+
+<div class="container detail-title-block">
+  <div class="breadcrumb"><a href="/">Home</a> › <a href="/deals/">Deals</a> › <a href="/deals/{{ deal.data.category }}/">{{ deal.data.category | replace("-", " ") | title }}</a></div>
+  {% if deal.data.badges %}
+  {% for badgeKey in deal.data.badges %}
+    {% set b = dealBadges[badgeKey] %}
+    {% if b %}<span class="badge" style="background:{{ b.color }}; color:#fff;">{{ b.label }}</span>{% endif %}
+  {% endfor %}
+  {% endif %}
+  <h1>{{ deal.data.title }}</h1>
+  <p class="lead">{{ deal.data.region }} · {{ deal.data.duration }}{% if deal.data.rating %} · ★ {{ deal.data.rating }} ({{ deal.data.review_count }} reviews){% endif %}</p>
+</div>
+
+<div class="container">
+  {% if deal.data.photos %}
+  <div class="gallery-grid">
+    {% for photo in deal.data.photos %}
+    <a href="{{ photo }}" target="_blank" rel="noopener"><img src="{{ photo }}" alt="{{ deal.data.title }} photo {{ loop.index }}"></a>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if deal.data.features %}
+  <div class="deal-features">
+    {% for f in deal.data.features %}
+      {% set label = dealFeatures[f] %}
+      {% if label %}<span class="deal-feature-pill">{{ label }}</span>{% endif %}
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <div class="detail-columns" style="margin-top:20px;">
+    <div>
+      <h2>About This Deal</h2>
+      {{ deal.templateContent | safe }}
+
+      {% if deal.data.golf_hotel %}
+      <h2>Golf Package Details</h2>
+      <table class="golf-spec-table">
+        <tr><td>Hotel</td><td>{{ deal.data.golf_hotel }}</td></tr>
+        <tr><td>Nights</td><td>{{ deal.data.golf_nights }}</td></tr>
+        <tr><td>Golf Rounds</td><td>{{ deal.data.golf_rounds }}</td></tr>
+        <tr><td>Meal Plan</td><td>{{ deal.data.golf_meal_plan }}</td></tr>
+        <tr><td>Transfers Included</td><td>{{ "Yes" if deal.data.golf_transfer_included else "No" }}</td></tr>
+        <tr><td>Buggy Included</td><td>{{ "Yes" if deal.data.golf_buggy_included else "No" }}</td></tr>
+      </table>
+      {% endif %}
+
+      {% if deal.data.included %}
+      <h2>What's Included</h2>
+      <ul class="amenities-list">
+        {% for i in deal.data.included %}<li>{{ i }}</li>{% endfor %}
+      </ul>
+      {% endif %}
+
+      {% if deal.data.excluded %}
+      <h2>Not Included</h2>
+      <ul style="list-style:none; padding:0; margin:0;">
+        {% for e in deal.data.excluded %}<li style="color:var(--ink-soft); padding:4px 0;">✕ {{ e }}</li>{% endfor %}
+      </ul>
+      {% endif %}
+
+      <div class="affiliate-disclosure">Some links on this page are affiliate links. If you make a booking through one of these links, we may earn a commission at no additional cost to you. Prices and availability may change on the partner's website.</div>
+    </div>
+
+    <aside class="detail-side">
+      <div class="deal-price-row" style="margin-top:0;">
+        <span class="deal-price-current" style="font-size:1.8rem;">{{ deal.data.currency }} {{ deal.data.price_from }}</span>
+        {% if deal.data.old_price %}<span class="deal-price-old">{{ deal.data.currency }} {{ deal.data.old_price }}</span>{% endif %}
+      </div>
+      <div class="deal-price-unit" style="margin-bottom:14px;">{{ deal.data.pricing_unit }}</div>
+      {% if deal.data.affiliate_url %}
+      <a href="{{ deal.data.affiliate_url }}" target="_blank" rel="sponsored noopener noreferrer" class="btn btn-orange"
+         onclick="if(window.gtag){gtag('event','affiliate_deal_click',{deal_title:'{{ deal.data.title }}',deal_category:'{{ deal.data.category }}'});}">
+        Check Prices &amp; Availability
+      </a>
+      {% endif %}
+      <p style="font-size:0.78rem; color:var(--ink-soft); margin-top:10px;">You'll complete your booking on the partner's website.</p>
+    </aside>
+  </div>
+</div>

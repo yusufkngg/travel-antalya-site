@@ -68,6 +68,28 @@ module.exports = function (eleventyConfig) {
     });
   });
 
+  eleventyConfig.addCollection("deals", function (collectionApi) {
+    return collectionApi.getFilteredByGlob("content/deals/*.md").sort((a, b) => {
+      return (a.data.title || "").localeCompare(b.data.title || "");
+    });
+  });
+
+  eleventyConfig.addCollection("featuredDeals", function (collectionApi) {
+    const deals = collectionApi.getFilteredByGlob("content/deals/*.md");
+    return deals.filter((d) => !!d.data.featured);
+  });
+
+  eleventyConfig.addCollection("dealCategoriesWithCounts", function (collectionApi) {
+    const cats = collectionApi.getFilteredByGlob("content/deal-categories/*.md").sort((a, b) => {
+      return (a.data.order || 99) - (b.data.order || 99);
+    });
+    const deals = collectionApi.getFilteredByGlob("content/deals/*.md");
+    return cats.map((cat) => {
+      const catDeals = deals.filter((d) => d.data.category === cat.data.slug);
+      return { data: cat.data, deals: catDeals };
+    });
+  });
+
   return {
     dir: {
       input: ".",

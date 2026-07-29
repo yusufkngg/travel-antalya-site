@@ -63,6 +63,62 @@ collections:
       - { label: "Excerpt (shown in listing)", name: "excerpt", widget: "text" }
       - { label: "Full Description", name: "body", widget: "markdown" }
 
+  - name: "deal-categories"
+    label: "Deal Categories"
+    folder: "content/deal-categories"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Name", name: "title", widget: "string" }
+      - { label: "URL Slug", name: "slug", widget: "string" }
+      - { label: "Short Description (shown on category card)", name: "description", widget: "text" }
+      - { label: "Intro Text (shown on category page)", name: "intro", widget: "text" }
+      - { label: "Hero / Card Image", name: "hero_image", widget: "image" }
+      - { label: "Accent Color (hex)", name: "color", widget: "string", default: "#0077B8" }
+      - { label: "Display Order", name: "order", widget: "number", default: 10 }
+      - { label: "Featured", name: "featured", widget: "boolean", default: false }
+      - { label: "Notes (not shown publicly)", name: "body", widget: "markdown", required: false }
+
+  - name: "deals"
+    label: "Deals"
+    folder: "content/deals"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Category", name: "category", widget: "relation", collection: "deal-categories", search_fields: ["title"], value_field: "slug", display_fields: ["title"] }
+      - { label: "Region", name: "region", widget: "select", options: ["Antalya City Centre", "Lara", "Kundu", "Belek", "Kemer", "Side", "Manavgat", "Alanya", "Kaş", "Kalkan", "Konyaaltı", "Serik", "Köprülü Canyon", "Pamukkale", "Kaleiçi"] }
+      - { label: "Price From", name: "price_from", widget: "number", value_type: "float" }
+      - { label: "Old Price (optional, for showing a discount)", name: "old_price", widget: "number", value_type: "float", required: false }
+      - { label: "Discount % (leave blank to hide)", name: "discount_percentage", widget: "number", required: false }
+      - { label: "Currency", name: "currency", widget: "select", options: ["GBP", "EUR", "USD", "TRY"] }
+      - { label: "Pricing Unit", name: "pricing_unit", widget: "select", options: ["per person", "per group", "per package", "per room", "per night", "per vehicle", "per round", "per couple"] }
+      - { label: "Duration (display text)", name: "duration", widget: "string" }
+      - { label: "Rating (0-5)", name: "rating", widget: "number", value_type: "float", required: false }
+      - { label: "Review Count", name: "review_count", widget: "number", required: false }
+      - { label: "Badges", name: "badges", widget: "select", multiple: true, required: false, options: ["editors-choice", "most-popular", "last-minute", "limited-availability", "best-value", "family-favourite", "premium-experience", "new", "exclusive", "best-seller", "seasonal", "romantic"] }
+      - { label: "Features", name: "features", widget: "select", multiple: true, required: false, options: ["free-cancellation", "instant-confirmation", "mobile-ticket", "transfer-included", "meals-included", "guide-included", "family-friendly", "private", "small-group", "accessible"] }
+      - { label: "Featured on Deals Homepage", name: "featured", widget: "boolean", default: false }
+      - { label: "Last-Minute Deal", name: "last_minute", widget: "boolean", default: false }
+      - { label: "Cover Photo", name: "cover", widget: "image" }
+      - { label: "Photo Gallery", name: "photos", widget: "list", required: false, field: { label: "Photo", name: "photo", widget: "image" } }
+      - { label: "What's Included", name: "included", widget: "list", required: false, field: { label: "Item", name: "item", widget: "string" } }
+      - { label: "Not Included", name: "excluded", widget: "list", required: false, field: { label: "Item", name: "item", widget: "string" } }
+      - label: "Golf Package Details (only for Golf Packages category)"
+        name: "golf_details_note"
+        widget: "string"
+        required: false
+        hint: "Fill in the golf fields below only if this deal is a golf package."
+      - { label: "Golf: Hotel / Resort Name", name: "golf_hotel", widget: "string", required: false }
+      - { label: "Golf: Nights", name: "golf_nights", widget: "number", required: false }
+      - { label: "Golf: Rounds", name: "golf_rounds", widget: "number", required: false }
+      - { label: "Golf: Meal Plan", name: "golf_meal_plan", widget: "select", options: ["Room only", "Bed & breakfast", "Half-board", "All-inclusive"], required: false }
+      - { label: "Golf: Transfers Included", name: "golf_transfer_included", widget: "boolean", default: false, required: false }
+      - { label: "Golf: Buggy Included", name: "golf_buggy_included", widget: "boolean", default: false, required: false }
+      - { label: "Affiliate / Booking Link", name: "affiliate_url", widget: "string" }
+      - { label: "Excerpt (shown on cards)", name: "excerpt", widget: "text" }
+      - { label: "Full Description", name: "body", widget: "markdown" }
+
   - name: "restaurants"
     label: "Restaurants"
     folder: "content/restaurants"

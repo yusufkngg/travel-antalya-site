@@ -1,0 +1,154 @@
+---
+layout: base.njk
+pageTitle: "Antalya Deals: Tours, Golf Packages and Holiday Offers"
+pageDescription: "Discover hand-picked Antalya deals, including golf packages, day tours, boat trips, hotel offers and unforgettable local experiences."
+pageUrl: "/deals/"
+ogImage: "/images/photos/coastal-extra-1.jpg"
+permalink: "/deals/index.html"
+schema:
+  "@context": "https://schema.org"
+  "@type": "CollectionPage"
+  name: "Antalya Deals"
+  url: "https://travel-antalya.com/deals/"
+eleventyExcludeFromCollections: true
+---
+{% set cats = collections.dealCategoriesWithCounts %}
+{% set deals = collections.deals %}
+{% set featuredDeals = collections.featuredDeals %}
+
+<section class="hero" style="padding:56px 0 40px;">
+  <div class="container">
+    <span class="eyebrow">Deals</span>
+    <h1>Discover the Best Antalya Travel Deals</h1>
+    <p class="lead" style="max-width:640px; font-size:1.1rem;">Compare hand-picked tours, activities, golf holidays, hotel packages and exclusive Antalya experiences — all in one place.</p>
+    <div class="deal-features" style="margin-top:14px;">
+      <span class="deal-feature-pill">Hand-picked by locals</span>
+      <span class="deal-feature-pill">Transparent pricing</span>
+      <span class="deal-feature-pill">Trusted partners</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CATEGORY GRID ============ -->
+<section style="padding-top:0;">
+  <div class="container">
+    <div class="section-head">
+      <div><h2>Browse by Category</h2></div>
+    </div>
+    <div class="grid">
+      {% for cat in cats %}
+      <a href="/deals/{{ cat.data.slug }}/" class="card" style="text-decoration:none;">
+        <div class="card-media"><span class="card-tag">{{ cat.deals.length }} deals</span>
+          <img src="{{ cat.data.hero_image }}" alt="{{ cat.data.title }}">
+        </div>
+        <div class="card-body">
+          <h3>{{ cat.data.title }}</h3>
+          <p>{{ cat.data.description }}</p>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURED DEALS ============ -->
+<section class="tint">
+  <div class="container">
+    <div class="section-head">
+      <div><span class="eyebrow">Featured</span><h2>Featured Deals</h2></div>
+    </div>
+    <div class="grid">
+      {% for deal in featuredDeals %}
+      <div class="card">
+        <div class="card-media">
+          {% if deal.data.badges and deal.data.badges.length > 0 %}
+          {% set b = dealBadges[deal.data.badges[0]] %}
+          {% if b %}<span class="card-tag" style="background:{{ b.color }};">{{ b.label }}</span>{% endif %}
+          {% endif %}
+          <img src="{{ deal.data.cover }}" alt="{{ deal.data.title }}">
+        </div>
+        <div class="card-body">
+          <span class="card-meta">{{ deal.data.region }}</span>
+          <h3><a href="/deals/{{ deal.data.category }}/{{ deal.data.title | slugify }}/" style="color:inherit;">{{ deal.data.title }}</a></h3>
+          <p>{{ deal.data.excerpt }}</p>
+          <div class="deal-price-row">
+            <span class="deal-price-current">{{ deal.data.currency }} {{ deal.data.price_from }}</span>
+            {% if deal.data.old_price %}<span class="deal-price-old">{{ deal.data.currency }} {{ deal.data.old_price }}</span>{% endif %}
+            {% if deal.data.discount_percentage %}<span class="deal-discount-tag">-{{ deal.data.discount_percentage }}%</span>{% endif %}
+          </div>
+          <span class="deal-price-unit">{{ deal.data.pricing_unit }}</span>
+          <div style="margin-top:10px;"><a href="/deals/{{ deal.data.category }}/{{ deal.data.title | slugify }}/" class="btn btn-orange" style="padding:9px 18px; font-size:0.85rem;">View Deal</a></div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ============ ALL DEALS ============ -->
+<section>
+  <div class="container">
+    <div class="section-head">
+      <div><h2>All Deals</h2></div>
+    </div>
+    <div class="category-tab-row">
+      <a href="/deals/" class="category-tab active">All ({{ deals.length }})</a>
+      {% for cat in cats %}
+      <a href="/deals/{{ cat.data.slug }}/" class="category-tab">{{ cat.data.title }} ({{ cat.deals.length }})</a>
+      {% endfor %}
+    </div>
+    <p class="results-count">Showing {{ deals.length }} deals</p>
+
+    <div class="grid">
+      {% for deal in deals %}
+      <div class="card">
+        <div class="card-media">
+          {% if deal.data.badges and deal.data.badges.length > 0 %}
+          {% set b = dealBadges[deal.data.badges[0]] %}
+          {% if b %}<span class="card-tag" style="background:{{ b.color }};">{{ b.label }}</span>{% endif %}
+          {% endif %}
+          <img src="{{ deal.data.cover }}" alt="{{ deal.data.title }}">
+        </div>
+        <div class="card-body">
+          <span class="card-meta">{{ deal.data.region }} · {{ deal.data.duration }}</span>
+          <h3><a href="/deals/{{ deal.data.category }}/{{ deal.data.title | slugify }}/" style="color:inherit;">{{ deal.data.title }}</a></h3>
+          <p>{{ deal.data.excerpt }}</p>
+          <div class="deal-price-row">
+            <span class="deal-price-current">{{ deal.data.currency }} {{ deal.data.price_from }}</span>
+            {% if deal.data.old_price %}<span class="deal-price-old">{{ deal.data.currency }} {{ deal.data.old_price }}</span>{% endif %}
+            {% if deal.data.discount_percentage %}<span class="deal-discount-tag">-{{ deal.data.discount_percentage }}%</span>{% endif %}
+          </div>
+          <span class="deal-price-unit">{{ deal.data.pricing_unit }}</span>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="tint">
+  <div class="container" style="max-width:820px;">
+    <div class="section-head"><div><h2>Frequently Asked Questions</h2></div></div>
+    <div class="faq-item">
+      <h4>Does Travel Antalya take bookings directly?</h4>
+      <p>No. We compare and present offers from trusted travel partners. Bookings are completed on the partner's own website.</p>
+    </div>
+    <div class="faq-item">
+      <h4>How often are deal prices updated?</h4>
+      <p>We review listed prices regularly, but the partner's website is always the final source — prices and availability can change after we publish a deal.</p>
+    </div>
+    <div class="faq-item">
+      <h4>What does an affiliate link mean?</h4>
+      <p>Some links on this page are affiliate links. If you book through one, we may earn a commission at no extra cost to you.</p>
+    </div>
+    <div class="faq-item">
+      <h4>Are prices per person?</h4>
+      <p>Not always — check the pricing unit shown on each deal (per person, per couple, per group, per vehicle or per night all appear on this site).</p>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <div class="affiliate-disclosure">Some links on this page are affiliate links. If you make a booking through one of these links, we may earn a commission at no additional cost to you. Prices and availability may change on the partner's website.</div>
+</div>

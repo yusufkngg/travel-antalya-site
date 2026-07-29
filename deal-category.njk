@@ -1,0 +1,72 @@
+---
+pagination:
+  data: collections.dealCategoriesWithCounts
+  size: 1
+  alias: cat
+permalink: "/deals/{{ cat.data.slug }}/index.html"
+layout: base.njk
+eleventyExcludeFromCollections: true
+pageTitle: "{{ cat.data.title }} in Antalya — Deals"
+pageDescription: "{{ cat.data.description }}"
+pageUrl: "/deals/{{ cat.data.slug }}/"
+ogImage: "{{ cat.data.hero_image }}"
+schema:
+  "@context": "https://schema.org"
+  "@type": "CollectionPage"
+  name: "{{ cat.data.title }}"
+  url: "https://travel-antalya.com/deals/{{ cat.data.slug }}/"
+---
+{% set deals = cat.deals %}
+
+<section style="padding:0;">
+  <div class="detail-hero-media" style="aspect-ratio:21/8;">
+    <img src="{{ cat.data.hero_image }}" alt="{{ cat.data.title }}">
+  </div>
+  <div class="container" style="padding-top:28px;">
+    <div class="breadcrumb"><a href="/">Home</a> › <a href="/deals/">Deals</a> › {{ cat.data.title }}</div>
+    <span class="eyebrow">Deals</span>
+    <h1>{{ cat.data.title }} in Antalya</h1>
+    <p class="lead" style="max-width:680px; font-size:1.1rem;">{{ cat.data.intro }}</p>
+  </div>
+</section>
+
+<section style="padding-top:20px;">
+  <div class="container">
+    <div class="category-tab-row">
+      <a href="/deals/" class="category-tab">All Deals</a>
+      {% for c in collections.dealCategoriesWithCounts %}
+      <a href="/deals/{{ c.data.slug }}/" class="category-tab {{ 'active' if c.data.slug == cat.data.slug }}">{{ c.data.title }}</a>
+      {% endfor %}
+    </div>
+    <p class="results-count">Showing {{ deals.length }} {{ cat.data.title | lower }}</p>
+
+    <div class="grid">
+      {% for deal in deals %}
+      <div class="card">
+        <div class="card-media">
+          {% if deal.data.badges and deal.data.badges.length > 0 %}
+          {% set b = dealBadges[deal.data.badges[0]] %}
+          {% if b %}<span class="card-tag" style="background:{{ b.color }};">{{ b.label }}</span>{% endif %}
+          {% endif %}
+          <img src="{{ deal.data.cover }}" alt="{{ deal.data.title }}">
+        </div>
+        <div class="card-body">
+          <span class="card-meta">{{ deal.data.region }} · {{ deal.data.duration }}</span>
+          <h3><a href="/deals/{{ deal.data.category }}/{{ deal.data.title | slugify }}/" style="color:inherit;">{{ deal.data.title }}</a></h3>
+          <p>{{ deal.data.excerpt }}</p>
+          <div class="deal-price-row">
+            <span class="deal-price-current">{{ deal.data.currency }} {{ deal.data.price_from }}</span>
+            {% if deal.data.old_price %}<span class="deal-price-old">{{ deal.data.currency }} {{ deal.data.old_price }}</span>{% endif %}
+            {% if deal.data.discount_percentage %}<span class="deal-discount-tag">-{{ deal.data.discount_percentage }}%</span>{% endif %}
+          </div>
+          <span class="deal-price-unit">{{ deal.data.pricing_unit }}</span>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <div class="affiliate-disclosure">Some links on this page are affiliate links. If you make a booking through one of these links, we may earn a commission at no additional cost to you.</div>
+</div>
