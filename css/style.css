@@ -105,9 +105,13 @@ p { margin: 0 0 1em; color: var(--ink-soft); font-weight: 300; }
 .nav-links a { color: var(--ink); padding-bottom: 4px; border-bottom: 2px solid transparent; }
 .nav-links a:hover { color: var(--brand-blue); border-color: var(--brand-orange); }
 .nav-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
   background: var(--brand-blue);
   color: #fff !important;
-  padding: 9px 18px;
+  padding: 10px 18px;
   border-radius: var(--radius);
   font-weight: 600 !important;
   border-bottom: none !important;
