@@ -88,8 +88,8 @@ schema:
 
     <aside class="detail-side">
       <div class="deal-price-row" style="margin-top:0;">
-        <span class="deal-price-current" style="font-size:1.8rem;">{{ deal.data.currency }} {{ deal.data.price_from }}</span>
-        {% if deal.data.old_price %}<span class="deal-price-old">{{ deal.data.currency }} {{ deal.data.old_price }}</span>{% endif %}
+        <span class="deal-price-current" style="font-size:1.8rem;">{{ currencySymbols[deal.data.currency] or deal.data.currency }}{{ deal.data.price_from }}</span>
+        {% if deal.data.old_price %}<span class="deal-price-old">{{ currencySymbols[deal.data.currency] or deal.data.currency }}{{ deal.data.old_price }}</span>{% endif %}
       </div>
       <div class="deal-price-unit" style="margin-bottom:14px;">{{ deal.data.pricing_unit }}</div>
       {% if deal.data.affiliate_url %}

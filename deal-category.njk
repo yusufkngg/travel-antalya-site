@@ -55,8 +55,8 @@ schema:
           <h3><a href="/deals/{{ deal.data.category }}/{{ deal.data.title | slugify }}/" style="color:inherit;">{{ deal.data.title }}</a></h3>
           <p>{{ deal.data.excerpt }}</p>
           <div class="deal-price-row">
-            <span class="deal-price-current">{{ deal.data.currency }} {{ deal.data.price_from }}</span>
-            {% if deal.data.old_price %}<span class="deal-price-old">{{ deal.data.currency }} {{ deal.data.old_price }}</span>{% endif %}
+            <span class="deal-price-current">{{ currencySymbols[deal.data.currency] or deal.data.currency }}{{ deal.data.price_from }}</span>
+            {% if deal.data.old_price %}<span class="deal-price-old">{{ currencySymbols[deal.data.currency] or deal.data.currency }}{{ deal.data.old_price }}</span>{% endif %}
             {% if deal.data.discount_percentage %}<span class="deal-discount-tag">-{{ deal.data.discount_percentage }}%</span>{% endif %}
           </div>
           <span class="deal-price-unit">{{ deal.data.pricing_unit }}</span>

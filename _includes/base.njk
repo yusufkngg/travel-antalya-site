@@ -23,7 +23,7 @@
 <header class="site-header">
   <div class="nav-row">
     <a href="/"><img src="/images/logo.png" alt="Travel Antalya" class="logo-mark"></a>
-    <ul class="nav-links">
+    <ul class="nav-links" id="mainNavLinks">
       <li><a href="/things-to-do/">Explore</a></li>
       <li><a href="/hotels/">Places To Stay</a></li>
       <li><a href="/restaurants/">Eat &amp; Drink</a></li>
@@ -31,6 +31,9 @@
       <li><a href="/blog/">Blog</a></li>
       <li><a href="/deals/" class="nav-cta">Deals</a></li>
     </ul>
+    <button type="button" class="mobile-menu-toggle" aria-label="Menu" aria-expanded="false" aria-controls="mainNavLinks" onclick="var n=document.getElementById('mainNavLinks');var open=n.classList.toggle('nav-open');this.setAttribute('aria-expanded',open);">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
 
