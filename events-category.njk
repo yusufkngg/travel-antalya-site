@@ -16,7 +16,7 @@ ogImage: "{{ cat.events[0].data.cover }}"
     <div class="breadcrumb"><a href="/">Home</a> › <a href="/events/">Events</a> › {{ cat.name }}</div>
     <span class="eyebrow">Events</span>
     <h1>{{ cat.name }} Events in Antalya</h1>
-    <p class="lead">{{ cat.events.length }} event{{ "s" if cat.events.length != 1 else "" }} in this category.</p>
+    <p class="lead">{{ cat.events.length }} events in this category.</p>
   </div>
 </section>
 
@@ -42,10 +42,7 @@ ogImage: "{{ cat.events[0].data.cover }}"
   </div>
 </section>
 
-{% set ns = namespace(hasMedia=false) %}
-{% for e in cat.events %}{% if e.data.video or (e.data.photos and e.data.photos.length > 0) %}{% set ns.hasMedia = true %}{% endif %}{% endfor %}
-
-{% if ns.hasMedia %}
+{% if cat.hasMedia %}
 <section class="tint">
   <div class="container">
     <div class="section-head"><div><h2>Photos &amp; Video from Past {{ cat.name }} Events</h2></div></div>
