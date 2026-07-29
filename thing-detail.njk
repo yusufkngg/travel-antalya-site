@@ -2,57 +2,57 @@
 pagination:
   data: collections.thingsToDo
   size: 1
-  alias: item
-permalink: "/things-to-do/{{ item.data.title | slugify }}/index.html"
+  alias: thing
+permalink: "/things-to-do/{{ thing.data.title | slugify }}/index.html"
 layout: base.njk
 eleventyExcludeFromCollections: true
-pageTitle: "{{ item.data.title }} — Travel Antalya"
-pageDescription: "{{ item.data.excerpt }}"
-pageUrl: "/things-to-do/{{ item.data.title | slugify }}/"
-ogImage: "{{ item.data.cover }}"
+pageTitle: "{{ thing.data.title }} — Travel Antalya"
+pageDescription: "{{ thing.data.excerpt }}"
+pageUrl: "/things-to-do/{{ thing.data.title | slugify }}/"
+ogImage: "{{ thing.data.cover }}"
 ogType: "website"
 schema:
   "@context": "https://schema.org"
   "@type": "TouristAttraction"
-  name: "{{ item.data.title }}"
-  description: "{{ item.data.excerpt }}"
-  image: "https://travel-antalya.com{{ item.data.cover }}"
+  name: "{{ thing.data.title }}"
+  description: "{{ thing.data.excerpt }}"
+  image: "https://travel-antalya.com{{ thing.data.cover }}"
 ---
 <section class="detail-hero">
-  <div class="detail-hero-media"><img src="{{ item.data.cover }}" alt="{{ item.data.title }}"></div>
+  <div class="detail-hero-media"><img src="{{ thing.data.cover }}" alt="{{ thing.data.title }}"></div>
 </section>
 
 <div class="container detail-title-block">
-  <span class="badge badge-verified">{{ item.data.category }}</span>
-  <h1>{{ item.data.title }}</h1>
-  <p class="lead">{{ item.data.tagline }}</p>
+  <span class="badge badge-verified">{{ thing.data.category }}</span>
+  <h1>{{ thing.data.title }}</h1>
+  <p class="lead">{{ thing.data.tagline }}</p>
 </div>
 
 <div class="container">
-  {% if item.data.photos %}
+  {% if thing.data.photos %}
   <div class="gallery-grid">
-    {% for photo in item.data.photos %}
-    <a href="{{ photo }}" target="_blank" rel="noopener"><img src="{{ photo }}" alt="{{ item.data.title }} photo {{ loop.index }}"></a>
+    {% for photo in thing.data.photos %}
+    <a href="{{ photo }}" target="_blank" rel="noopener"><img src="{{ photo }}" alt="{{ thing.data.title }} photo {{ loop.index }}"></a>
     {% endfor %}
   </div>
   {% endif %}
 
   <div class="detail-columns" style="margin-top:30px;">
     <div>
-      <h2>About {{ item.data.title }}</h2>
-      {{ item.templateContent | safe }}
+      <h2>About {{ thing.data.title }}</h2>
+      {{ thing.templateContent | safe }}
 
-      {% if item.data.map_lat and item.data.map_lng %}
+      {% if thing.data.map_lat and thing.data.map_lng %}
       <h2>Location</h2>
       <div class="map-embed">
-        <iframe src="https://www.google.com/maps?q={{ item.data.map_lat }},{{ item.data.map_lng }}&output=embed" loading="lazy"></iframe>
+        <iframe src="https://www.google.com/maps?q={{ thing.data.map_lat }},{{ thing.data.map_lng }}&output=embed" loading="lazy"></iframe>
       </div>
       {% endif %}
     </div>
 
     <aside class="detail-side">
       <div style="color:var(--ink-soft); font-size:0.9rem; margin-bottom:6px;">Category</div>
-      <div class="price-tag" style="font-size:1.15rem;">{{ item.data.category }}</div>
+      <div class="price-tag" style="font-size:1.15rem;">{{ thing.data.category }}</div>
       <a href="/things-to-do/" class="btn btn-blue">See more things to do</a>
     </aside>
   </div>
