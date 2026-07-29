@@ -59,7 +59,13 @@ module.exports = function (eleventyConfig) {
       if (!cats[c]) cats[c] = [];
       cats[c].push(e);
     });
-    return Object.keys(cats).map((name) => ({ name, events: cats[name] }));
+    return Object.keys(cats).map((name) => {
+      const catEvents = cats[name];
+      const hasMedia = catEvents.some((e) => {
+        return !!e.data.video || (Array.isArray(e.data.photos) && e.data.photos.length > 0);
+      });
+      return { name: name, events: catEvents, hasMedia: hasMedia };
+    });
   });
 
   return {
