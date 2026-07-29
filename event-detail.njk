@@ -1,0 +1,70 @@
+---
+pagination:
+  data: collections.events
+  size: 1
+  alias: e
+permalink: "/events/{{ e.data.title | slugify }}/index.html"
+layout: base.njk
+eleventyExcludeFromCollections: true
+pageTitle: "{{ e.data.title }} — Travel Antalya"
+pageDescription: "{{ e.data.excerpt }}"
+pageUrl: "/events/{{ e.data.title | slugify }}/"
+ogImage: "{{ e.data.cover }}"
+ogType: "website"
+schema:
+  "@context": "https://schema.org"
+  "@type": "Event"
+  name: "{{ e.data.title }}"
+  startDate: "{{ e.data.start_date }}"
+  endDate: "{{ e.data.end_date }}"
+  location: { "@type": "Place", name: "{{ e.data.venue }}" }
+  image: "https://travel-antalya.com{{ e.data.cover }}"
+  description: "{{ e.data.excerpt }}"
+---
+<section class="detail-hero">
+  <div class="detail-hero-media"><img src="{{ e.data.cover }}" alt="{{ e.data.title }}"></div>
+</section>
+
+<div class="container detail-title-block">
+  <span class="badge badge-verified">{{ e.data.category }}</span>
+  <h1>{{ e.data.title }}</h1>
+  <p class="lead">{{ e.data.tagline }}</p>
+</div>
+
+<div class="container">
+  {% if e.data.photos %}
+  <div class="gallery-grid">
+    {% for photo in e.data.photos %}
+    <a href="{{ photo }}" target="_blank" rel="noopener"><img src="{{ photo }}" alt="{{ e.data.title }} photo {{ loop.index }}"></a>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if e.data.video %}
+  <div class="map-embed" style="aspect-ratio:16/9;">
+    <iframe src="{{ e.data.video }}" loading="lazy" style="height:100%;" allowfullscreen></iframe>
+  </div>
+  {% endif %}
+
+  <div class="detail-columns" style="margin-top:30px;">
+    <div>
+      <h2>About This Event</h2>
+      {{ e.templateContent | safe }}
+
+      {% if e.data.map_lat and e.data.map_lng %}
+      <h2>Venue</h2>
+      <div class="map-embed">
+        <iframe src="https://www.google.com/maps?q={{ e.data.map_lat }},{{ e.data.map_lng }}&output=embed" loading="lazy"></iframe>
+      </div>
+      {% endif %}
+    </div>
+
+    <aside class="detail-side">
+      <div style="color:var(--ink-soft); font-size:0.9rem;">{{ e.data.date_display }}</div>
+      <div class="price-tag" style="font-size:1.15rem;">{{ e.data.venue }}</div>
+      {% if e.data.booking_url %}
+      <a href="{{ e.data.booking_url }}" target="_blank" rel="noopener" class="btn btn-orange">Get Tickets</a>
+      {% endif %}
+    </aside>
+  </div>
+</div>

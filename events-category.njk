@@ -1,0 +1,68 @@
+---
+pagination:
+  data: collections.eventCategories
+  size: 1
+  alias: cat
+permalink: "/events/category/{{ cat.name | slugify }}/index.html"
+layout: base.njk
+eleventyExcludeFromCollections: true
+pageTitle: "{{ cat.name }} Events in Antalya"
+pageDescription: "Browse {{ cat.name }} events in Antalya, Turkey."
+pageUrl: "/events/category/{{ cat.name | slugify }}/"
+ogImage: "{{ cat.events[0].data.cover }}"
+---
+<section class="listing-hero">
+  <div class="container">
+    <span class="eyebrow">Events</span>
+    <h1>{{ cat.name }} Events in Antalya</h1>
+    <p class="lead">{{ cat.events.length }} event{{ "s" if cat.events.length != 1 else "" }} in this category.</p>
+  </div>
+</section>
+
+<section style="padding-top:0;">
+  <div class="container">
+    {% for e in cat.events %}
+    <div class="listing-row">
+      <div class="listing-row-media">
+        <img src="{{ e.data.cover }}" alt="{{ e.data.title }}">
+      </div>
+      <div class="listing-row-body">
+        <div class="listing-row-top">
+          <h3 class="listing-row-title"><a href="/events/{{ e.data.title | slugify }}/">{{ e.data.title }}</a></h3>
+          <a href="/events/{{ e.data.title | slugify }}/" class="listing-row-arrow">↗</a>
+        </div>
+        <p class="listing-row-excerpt">{{ e.data.excerpt }}</p>
+        <div class="listing-row-meta">
+          <span>{{ e.data.date_display }}</span><span>·</span><span>{{ e.data.venue }}</span>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% set ns = namespace(hasMedia=false) %}
+{% for e in cat.events %}{% if e.data.video or (e.data.photos and e.data.photos.length > 0) %}{% set ns.hasMedia = true %}{% endif %}{% endfor %}
+
+{% if ns.hasMedia %}
+<section class="tint">
+  <div class="container">
+    <div class="section-head"><div><h2>Photos &amp; Video from Past {{ cat.name }} Events</h2></div></div>
+    <div class="grid">
+      {% for e in cat.events %}
+        {% if e.data.video %}
+        <div class="card">
+          <div class="card-media" style="aspect-ratio:16/9;"><iframe src="{{ e.data.video }}" style="width:100%;height:100%;border:0;" loading="lazy" allowfullscreen></iframe></div>
+          <div class="card-body"><h3>{{ e.data.title }}</h3></div>
+        </div>
+        {% elif e.data.photos and e.data.photos.length > 0 %}
+        <div class="card">
+          <div class="card-media"><img src="{{ e.data.cover }}" alt="{{ e.data.title }}"></div>
+          <div class="card-body"><h3>{{ e.data.title }}</h3></div>
+        </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}

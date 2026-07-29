@@ -11,7 +11,7 @@
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://travel-antalya.com/guide/things-to-do.html</loc>
+    <loc>https://travel-antalya.com/things-to-do/</loc>
     <lastmod>2026-07-24</lastmod>
     <priority>0.8</priority>
   </url>
@@ -26,7 +26,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://travel-antalya.com/guide/events.html</loc>
+    <loc>https://travel-antalya.com/events/</loc>
     <lastmod>2026-07-24</lastmod>
     <priority>0.7</priority>
   </url>
@@ -100,4 +100,13 @@
     <lastmod>2026-03-01</lastmod>
     <priority>0.7</priority>
   </url>
+  <url><loc>https://travel-antalya.com/things-to-do/kalecici-old-town/</loc><priority>0.6</priority></url>
+  <url><loc>https://travel-antalya.com/things-to-do/manavgat-waterfall/</loc><priority>0.6</priority></url>
+  <url><loc>https://travel-antalya.com/things-to-do/aspendos-theatre/</loc><priority>0.6</priority></url>
+  <url><loc>https://travel-antalya.com/things-to-do/konyaalti-beach/</loc><priority>0.6</priority></url>
+  <url><loc>https://travel-antalya.com/events/aspendos-opera-ballet-festival/</loc><priority>0.6</priority></url>
+  <url><loc>https://travel-antalya.com/events/golden-orange-film-festival/</loc><priority>0.6</priority></url>
+  <url><loc>https://travel-antalya.com/events/category/festivals/</loc><priority>0.5</priority></url>
+  <url><loc>https://travel-antalya.com/events/category/cultural/</loc><priority>0.5</priority></url>
+  <url><loc>https://travel-antalya.com/events/category/concerts/</loc><priority>0.5</priority></url>
 </urlset>

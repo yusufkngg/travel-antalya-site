@@ -1,0 +1,122 @@
+---
+layout: base.njk
+pageTitle: "Things to Do in Antalya"
+pageDescription: "Ancient ruins, turquoise beaches, an old Roman harbor and more — your complete guide to things to do in Antalya, Turkey."
+pageUrl: "/things-to-do/"
+ogImage: "/images/photos/things-to-do-cover.jpg"
+permalink: "/things-to-do/index.html"
+schema:
+  "@context": "https://schema.org"
+  "@type": "CollectionPage"
+  name: "Things to Do in Antalya"
+  url: "https://travel-antalya.com/things-to-do/"
+eleventyExcludeFromCollections: true
+---
+{% set items = collections.thingsToDo %}
+{% set hotels = collections.hotels %}
+
+<section class="listing-hero">
+  <div class="container">
+    <span class="eyebrow">Explore</span>
+    <h1>Things to Do in Antalya</h1>
+    <p class="lead" style="max-width:640px;">Dive into ancient ruins, turquoise water and a walled old town that's been welcoming travelers since Roman times.</p>
+  </div>
+</section>
+
+<section style="padding-top:0;">
+  <div class="container" style="max-width:820px;">
+    <p>In Antalya, the possibilities go far beyond the beach. Whether you're drawn to <strong>ancient history</strong>, eager to explore a <strong>Roman-era old town</strong>, or seeking a cool escape at a waterfall inland, there's something for every kind of traveler here.</p>
+  </div>
+</section>
+
+<section class="tint" style="padding-top:40px;">
+  <div class="container split">
+    <div>
+      <span class="eyebrow">Ancient Ruins</span>
+      <h2 style="font-size:1.7rem;">2,000 years of history, still standing</h2>
+      <p>The Antalya region has some of the best-preserved Roman and Hellenistic sites anywhere in the Mediterranean. Aspendos Theatre still has its original acoustics; Perge and Termessos reward anyone willing to make the short drive inland.</p>
+    </div>
+    <div class="card-media" style="aspect-ratio:4/3; border-radius:6px;">
+      <img src="/images/photos/things-to-do-cover.jpg" alt="Ancient ruins near Antalya">
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:40px;">
+  <div class="container split">
+    <div class="card-media" style="aspect-ratio:4/3; border-radius:6px; order:2;">
+      <img src="/images/photos/antalya-coastline.jpg" alt="Kaleiçi old town, Antalya">
+    </div>
+    <div style="order:1;">
+      <span class="eyebrow">Old Town &amp; Culture</span>
+      <h2 style="font-size:1.7rem;">Kaleiçi: a walled town around a Roman harbor</h2>
+      <p>Narrow cobblestone lanes, restored Ottoman houses and a small working harbor make Kaleiçi worth a full day on its own — more once you add in the Yivli Minare and the old bazaar streets.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EXPLORE THINGS TO DO (horizontal listing, CMS-driven) ============ -->
+<section class="tint">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Explore</span>
+        <h2>Explore Things to Do in Antalya</h2>
+      </div>
+    </div>
+    <div class="filter-bar">
+      <span class="filter-pill">Old Town</span>
+      <span class="filter-pill">Nature</span>
+      <span class="filter-pill">Ancient Ruins</span>
+      <span class="filter-pill">Beaches</span>
+      <span class="filter-pill">Nightlife</span>
+    </div>
+    <p class="results-count">Showing {{ items.length }} things to do</p>
+
+    {% for item in items %}
+    <div class="listing-row">
+      <div class="listing-row-media">
+        <img src="{{ item.data.cover }}" alt="{{ item.data.title }}">
+      </div>
+      <div class="listing-row-body">
+        <div class="listing-row-top">
+          <div>
+            <span class="badge badge-verified">{{ item.data.category }}</span>
+            <h3 class="listing-row-title"><a href="/things-to-do/{{ item.data.title | slugify }}/">{{ item.data.title }}</a></h3>
+          </div>
+          <a href="/things-to-do/{{ item.data.title | slugify }}/" class="listing-row-arrow">↗</a>
+        </div>
+        <p class="listing-row-excerpt">{{ item.data.excerpt }}</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- ============ HOTELS (pulled live from the hotels collection) ============ -->
+<section>
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Places to Stay</span>
+        <h2>Hotels near everything on this page</h2>
+      </div>
+      <a href="/hotels/" class="see-all">See all hotels →</a>
+    </div>
+    <div class="grid">
+      {% for hotel in hotels %}
+      <div class="card">
+        <div class="card-media">
+          {% if hotel.data.tags and "sponsored" in hotel.data.tags %}<span class="card-tag">Sponsored</span>{% endif %}
+          <img src="{{ hotel.data.cover }}" alt="{{ hotel.data.title }}">
+        </div>
+        <div class="card-body">
+          <h3><a href="/hotels/{{ hotel.data.title | slugify }}/" style="color:inherit;">{{ hotel.data.title }}</a></h3>
+          <p>{{ hotel.data.excerpt }}</p>
+          <span class="card-meta">{{ hotel.data.neighborhood }} · {{ hotel.data.price }}</span>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

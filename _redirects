@@ -23,8 +23,8 @@
 # Pages
 /hotels/  /guide/hotels.html  301
 /beachfront-hotels/  /guide/hotels.html  301
-/things-to-do-in-antalya/  /guide/things-to-do.html  301
-/antalya-events/  /guide/events.html  301
+/things-to-do-in-antalya/  /things-to-do/  301
+/antalya-events/  /events/  301
 
 # Pages not yet rebuilt on the new site — temporarily send to homepage
 # TODO: build real /about/ and /privacy-policy/ pages, then point these at them instead

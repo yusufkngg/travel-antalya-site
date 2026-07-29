@@ -1,0 +1,81 @@
+---
+layout: base.njk
+pageTitle: "Antalya Events & Festivals"
+pageDescription: "Your guide to concerts, festivals and cultural events happening in Antalya, Turkey."
+pageUrl: "/events/"
+ogImage: "/images/photos/things-to-do-cover.jpg"
+permalink: "/events/index.html"
+schema:
+  "@context": "https://schema.org"
+  "@type": "CollectionPage"
+  name: "Antalya Events & Festivals"
+  url: "https://travel-antalya.com/events/"
+eleventyExcludeFromCollections: true
+---
+{% set cats = collections.eventCategories %}
+{% set events = collections.events %}
+
+<section class="listing-hero">
+  <div class="container">
+    <span class="eyebrow">Events</span>
+    <h1>Antalya Events &amp; Festivals</h1>
+    <p class="lead" style="max-width:640px;">From ancient theatres hosting opera under the stars to harbor-side jazz nights — here's what's on in Antalya.</p>
+    <div style="max-width:420px; margin-top:20px;">
+      <input type="text" placeholder="Search events…" style="width:100%; padding:12px 16px; border-radius:6px; border:1px solid var(--line); font-family:var(--font);" disabled>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FIND YOUR EVENT (category tags) ============ -->
+<section style="padding-top:0;">
+  <div class="container">
+    <div class="section-head">
+      <div><h2>Find Your Event</h2></div>
+    </div>
+    <div class="grid">
+      {% for cat in cats %}
+      <a href="/events/category/{{ cat.name | slugify }}/" class="card" style="text-decoration:none;">
+        <div class="card-media"><span class="card-tag">{{ cat.events.length }} event{{ "s" if cat.events.length != 1 else "" }}</span>
+          <img src="{{ cat.events[0].data.cover }}" alt="{{ cat.name }}">
+        </div>
+        <div class="card-body">
+          <h3>{{ cat.name }}</h3>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ============ ALL EVENTS (horizontal listing) ============ -->
+<section class="tint">
+  <div class="container">
+    <div class="section-head">
+      <div><h2>All Upcoming Events</h2></div>
+    </div>
+    <p class="results-count">Showing {{ events.length }} events</p>
+
+    {% for e in events %}
+    <div class="listing-row">
+      <div class="listing-row-media">
+        <img src="{{ e.data.cover }}" alt="{{ e.data.title }}">
+      </div>
+      <div class="listing-row-body">
+        <div class="listing-row-top">
+          <div>
+            <span class="badge badge-verified">{{ e.data.category }}</span>
+            <h3 class="listing-row-title"><a href="/events/{{ e.data.title | slugify }}/">{{ e.data.title }}</a></h3>
+          </div>
+          <a href="/events/{{ e.data.title | slugify }}/" class="listing-row-arrow">↗</a>
+        </div>
+        <p class="listing-row-excerpt">{{ e.data.excerpt }}</p>
+        <div class="listing-row-meta">
+          <span>{{ e.data.date_display }}</span>
+          <span>·</span>
+          <span>{{ e.data.venue }}</span>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
