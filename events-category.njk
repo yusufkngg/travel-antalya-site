@@ -13,6 +13,7 @@ ogImage: "{{ cat.events[0].data.cover }}"
 ---
 <section class="listing-hero">
   <div class="container">
+    <div class="breadcrumb"><a href="/">Home</a> › <a href="/events/">Events</a> › {{ cat.name }}</div>
     <span class="eyebrow">Events</span>
     <h1>{{ cat.name }} Events in Antalya</h1>
     <p class="lead">{{ cat.events.length }} event{{ "s" if cat.events.length != 1 else "" }} in this category.</p>
